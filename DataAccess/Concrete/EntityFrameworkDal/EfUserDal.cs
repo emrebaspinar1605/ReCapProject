@@ -7,8 +7,7 @@ using System.Text;
 
 namespace DataAccess.Concrete.EntityFrameworkDal
 {
-    public class EfBrandDal : EfEntityRepositoryBase<Brand, RentCarContext>, IBrandDal
+    public class EfUserDal:EfEntityRepositoryBase<User,RentCarContext>,IUserDal
     {
-      
     }
 }
