@@ -9,8 +9,8 @@ namespace WebAPI.Controllers
     [ApiController]
     public class RentalsController : ControllerBase
     {
-        IRentAlService _rentalService;
-        public RentalsController(IRentAlService rentalService)
+        IRentalService _rentalService;
+        public RentalsController(IRentalService rentalService)
         {
             _rentalService = rentalService;
         }

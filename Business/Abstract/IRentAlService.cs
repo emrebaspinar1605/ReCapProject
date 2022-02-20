@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Business.Abstract
 {
-    public interface IRentAlService
+    public interface IRentalService
     {
         IDataResult<List<Rental>> GetAll();
         IDataResult<List<Rental>> GetById(int rentalId);

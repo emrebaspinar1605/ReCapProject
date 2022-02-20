@@ -36,5 +36,6 @@ namespace Business.Constant
         public static string RentalInValid = "Böyle bir kayıt bulunmamaktadır lütfen doğru kayıt giriniz";
         public static string CarRentable = "Araç kiralanabilir ";
         public static string CarUnRentable = "Araç Kiralanamaz";
+        public static string StartA = "Açıklama 'A' harfi ile başlamalıdır!!!";
     }
 }
