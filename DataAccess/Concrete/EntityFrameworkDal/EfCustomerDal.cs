@@ -26,8 +26,6 @@ namespace DataAccess.Concrete.EntityFrameworkDal
                                  Id = u.Id,
                                  UserName = u.FirstName,
                                  CompanyName = c.CompanyName,
-                                 Password = u.Password
-
                              };
                 return result.ToList();
 

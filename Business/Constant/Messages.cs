@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -37,5 +38,19 @@ namespace Business.Constant
         public static string CarRentable = "Araç kiralanabilir ";
         public static string CarUnRentable = "Araç Kiralanamaz";
         public static string StartA = "Açıklama 'A' harfi ile başlamalıdır!!!";
+        public static string CarImagesNotfound="Araba Resmi bulunamadı";
+        public static string CarImageLimitExceded="Araba resim limiti aşıldı";
+        public static string CarImageAdded="Araba Resmi Eklendi";
+        public static string CarImageUpdated="Araba Resmi güncellendi";
+        public static string CarImageDeleted="Araba Resmi silinmiştir";
+        public static string CarImageListed="Araba Resimleri Listelendi";
+        public static string CarImageIdFound="Araba Resim Id'si bulundu";
+        public static string CarIdFoun="Araba Id'si Bulundu";
+        public static string AccessTokenCreated="Erişim Jetonu Oluşturuldu";
+        public static string UserAlreadyExists="Kullanıcı Zaten Mevcut";
+        public static string PasswordError="Şifre Hatalı";
+        public static string SuccessfulLogin="Giriş Başarılı";
+        public static string UserNotFound="Kullanıcı Bulunamadı";
+        public static string UserRegistered="Kullanıcı Kayıt Edildi";
     }
 }

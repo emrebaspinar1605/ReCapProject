@@ -1,13 +1,12 @@
 ﻿using Business.Abstract;
 using Entity.Concrete;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class BrandsController : ControllerBase
     {
         IBrandService _brandService;
@@ -21,15 +20,15 @@ namespace WebAPI.Controllers
             var result = _brandService.BrandGetById(brandId);
             if (result.Success)
             {
-                return Ok(result); 
+                return Ok(result);
             }
             return BadRequest(result);
 
-                }
+        }
         [HttpGet("getall")]
         public IActionResult Get()
         {
-           var result=_brandService.GetAll();
+            var result = _brandService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -45,7 +44,8 @@ namespace WebAPI.Controllers
                 return Ok(result);
             }
             return BadRequest(result);
-        } [HttpPost("delete")]
+        }
+        [HttpPost("delete")]
         public IActionResult PostDelete(Brand brand)
         {
             var result = _brandService.Delete(brand);
@@ -54,7 +54,8 @@ namespace WebAPI.Controllers
                 return Ok(result);
             }
             return BadRequest(result);
-        }[HttpPost("update")]
+        }
+        [HttpPost("update")]
         public IActionResult PostUpdate(Brand brand)
         {
             var result = _brandService.Update(brand);
@@ -64,6 +65,6 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        
+
     }
 }

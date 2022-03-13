@@ -1,7 +1,7 @@
 ﻿using Business.Abstract;
 using Entity.Concrete;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -11,7 +11,7 @@ namespace WebAPI.Controllers
         ICustomerService _customerService;
         public CustomerController(ICustomerService customerService)
         {
-            _customerService=customerService;
+            _customerService = customerService;
         }
         [HttpGet("getall")]
         public IActionResult Get()

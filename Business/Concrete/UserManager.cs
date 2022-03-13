@@ -2,10 +2,11 @@
 using Business.Constant;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using Entity.Concrete;
-using System;
+using Core.Entities.Concrete;
 using System.Collections.Generic;
-using System.Text;
+using Core.Aspects.Autofac.Validation;
+using Business.ValidationRules.FluentValidation;
+using System;
 
 namespace Business.Concrete
 {
@@ -16,6 +17,7 @@ namespace Business.Concrete
         {
             _userDal=userDal;
         }
+        [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(User user)
         {
 
@@ -42,12 +44,31 @@ namespace Business.Concrete
 
         public IDataResult<List<User>> GetAll()
         {
-            return new DataResult<List<User>>(_userDal.GetAll(),true,Messages.UserListed);
+            List<User> users;
+            try
+            {
+                users = _userDal.GetAll();
+            }
+            catch (Exception exception)
+            {
+                return new ErrorDataResult<List<User>>(exception.Message);
+            }
+            return new SuccessDataResult<List<User>>(users);
         }
 
         public IDataResult<List<User>> GetById(int userId)
         {
             return new SuccessDataResult<List<User>>(_userDal.GetAll(u=>u.Id==userId));
+        }
+
+        public User GetByMail(string email)
+        {
+            return _userDal.Get(u => u.Email == email);
+        }
+
+        public IDataResult<List<OperationClaim>> GetClaims(User user)
+        {
+            return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
         }
 
         public IResult Update(User user)

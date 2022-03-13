@@ -1,6 +1,5 @@
 ﻿using Business.Abstract;
 using Entity.Concrete;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -12,7 +11,7 @@ namespace WebAPI.Controllers
         ICarService _carService;
         public CarsController(ICarService carService)
         {
-                _carService = carService;
+            _carService = carService;
         }
         [HttpGet("getall")]
         public IActionResult Get()

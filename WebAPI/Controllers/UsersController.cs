@@ -1,6 +1,5 @@
 ﻿using Business.Abstract;
-using Entity.Concrete;
-using Microsoft.AspNetCore.Http;
+using Core.Entities.Concrete;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -12,7 +11,7 @@ namespace WebAPI.Controllers
         IUserService _userService;
         public UsersController(IUserService userService)
         {
-            _userService=userService;   
+            _userService = userService;
         }
         [HttpGet("getall")]
         public IActionResult Get()
