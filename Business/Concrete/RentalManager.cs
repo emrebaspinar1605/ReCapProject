@@ -1,7 +1,12 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects;
 using Business.Constant;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
+using Entities.DTOs;
 using Entity.Concrete;
 using System;
 using System.Collections.Generic;
@@ -17,6 +22,13 @@ namespace Business.Concrete
         {
             _rentalDal=rentalDal;
         }
+        public IDataResult<List<RentalDetailDto>> GetRentalDetails()
+        {
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalDetails());
+        }
+
+        [SecuredOperation("admin,rental.add")]
+        [CacheRemoveAspect("IRentalService.Get")]
         public IResult Add(Rental rental)
         {
             if (rental.RentDate==null)
@@ -37,12 +49,12 @@ namespace Business.Concrete
             _rentalDal.Delete(rental);
             return new Result(true,Messages.RentalDeleted);
         }
-
+        [CacheAspect]
         public IDataResult<List<Rental>> GetAll()
         {
             return new DataResult<List<Rental>>(_rentalDal.GetAll(), true, Messages.RentalListed);
         }
-
+        [CacheAspect]
         public IDataResult<List<Rental>> GetById(int rentalId)
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll(u=>u.Id==rentalId));
@@ -56,7 +68,8 @@ namespace Business.Concrete
             }
             return new Result(false, Messages.CarUnRentable);
         }
-
+        [ValidationAspect(typeof(RentalValidator))]
+        [CacheRemoveAspect("IRentalService.Get")]
         public IResult Update(Rental rental)
         {
 

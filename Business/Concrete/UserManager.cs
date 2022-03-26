@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using Core.Aspects.Autofac.Validation;
 using Business.ValidationRules.FluentValidation;
 using System;
+using Core.Aspects.Autofac.Caching;
+using Business.BusinessAspects;
 
 namespace Business.Concrete
 {
@@ -17,7 +19,8 @@ namespace Business.Concrete
         {
             _userDal=userDal;
         }
-        [ValidationAspect(typeof(RentalValidator))]
+        [ValidationAspect(typeof(UserValidator))]
+        [CacheRemoveAspect("IUserService.Get")]
         public IResult Add(User user)
         {
 
@@ -41,7 +44,7 @@ namespace Business.Concrete
         }
 
         
-
+        [CacheAspect]
         public IDataResult<List<User>> GetAll()
         {
             List<User> users;
@@ -55,7 +58,7 @@ namespace Business.Concrete
             }
             return new SuccessDataResult<List<User>>(users);
         }
-
+        [CacheAspect]
         public IDataResult<List<User>> GetById(int userId)
         {
             return new SuccessDataResult<List<User>>(_userDal.GetAll(u=>u.Id==userId));
@@ -70,7 +73,8 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
         }
-
+        [ValidationAspect(typeof(UserValidator))]
+        [CacheRemoveAspect("IUserService.Get")]
         public IResult Update(User user)
         {
 

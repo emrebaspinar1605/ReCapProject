@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Text;
 
 namespace Core.Utilities.Security.Hashing
 {
@@ -25,7 +23,6 @@ namespace Core.Utilities.Security.Hashing
                     {
                         return false;
                     }
-
                 }
                 return true;
             }

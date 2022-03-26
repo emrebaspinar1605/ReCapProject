@@ -1,7 +1,7 @@
 ﻿using Business.Abstract;
 using Entity.Concrete;
 using Microsoft.AspNetCore.Mvc;
-
+using System.Threading;
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -16,12 +16,23 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public IActionResult Get()
         {
+            Thread.Sleep(5000);
             var result = _carService.GetAll();
             if (result.Success)
             {
                 return Ok(result.Data);
             }
             return BadRequest(result.Message);
+        }
+        [HttpGet("getcardetails")]
+        public IActionResult GetCarDetails()
+        {
+            var result = _carService.GetCarDetails();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
         [HttpGet("brandid")]
         public IActionResult GetBrandId(int brandId)

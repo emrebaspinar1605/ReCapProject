@@ -12,7 +12,7 @@ using System.Text;
 
 namespace Core.Utilities.Security.Jwt
 {
-    public class JwtHelper:ITokenHelper
+    public class JwtHelper : ITokenHelper
     {
         public IConfiguration Configuration { get; }
         private TokenOptions _tokenOptions;
@@ -22,7 +22,7 @@ namespace Core.Utilities.Security.Jwt
             Configuration = configuration;
             _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
         }
-        public AccessToken CreateToken(User user,List<OperationClaim> operationClaims)
+        public AccessToken CreateToken(User user, List<OperationClaim> operationClaims)
         {
             _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration);
             var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenOptions.SecurityKey);
@@ -36,8 +36,8 @@ namespace Core.Utilities.Security.Jwt
                 Expiration = _accessTokenExpiration,
             };
         }
-        public JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions,User user,
-            SigningCredentials signingCredentials,List<OperationClaim> operationClaims)
+        public JwtSecurityToken CreateJwtSecurityToken(TokenOptions tokenOptions, User user,
+            SigningCredentials signingCredentials, List<OperationClaim> operationClaims)
         {
             var jwt = new JwtSecurityToken
                 (
@@ -49,9 +49,6 @@ namespace Core.Utilities.Security.Jwt
                 signingCredentials: signingCredentials
                 );
             return jwt;
-            
-
-            
         }
         private IEnumerable<Claim> SetClaims(User user, List<OperationClaim> operationClaims)
         {

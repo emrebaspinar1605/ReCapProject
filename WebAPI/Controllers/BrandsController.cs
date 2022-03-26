@@ -1,7 +1,7 @@
 ﻿using Business.Abstract;
 using Entity.Concrete;
 using Microsoft.AspNetCore.Mvc;
-
+using System.Threading;
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -28,6 +28,7 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public IActionResult Get()
         {
+            Thread.Sleep(5000);
             var result = _brandService.GetAll();
             if (result.Success)
             {

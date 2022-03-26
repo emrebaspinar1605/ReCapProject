@@ -1,21 +1,22 @@
 ﻿using Business.Abstract;
 using Entity.Concrete;
 using Microsoft.AspNetCore.Mvc;
-
+using System.Threading;
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomerController : ControllerBase
+    public class CustomersController : ControllerBase
     {
         ICustomerService _customerService;
-        public CustomerController(ICustomerService customerService)
+        public CustomersController(ICustomerService customerService)
         {
             _customerService = customerService;
         }
         [HttpGet("getall")]
         public IActionResult Get()
         {
+            Thread.Sleep(5000);
             var result = _customerService.GetAll();
             if (result.Success)
             {
@@ -25,7 +26,7 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpGet("colorid")]
+        [HttpGet("userid")]
         public IActionResult GetById(int customerId)
         {
             var result = _customerService.GetById(customerId);
